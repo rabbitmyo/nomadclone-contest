@@ -46,5 +46,5 @@ import styled from "styled-components";
     margin-top: 20px;
     a{
         color: #1d9bf0;
-    }
+    };
 `;
