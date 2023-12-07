@@ -23,7 +23,7 @@ export default function Timeline(){
     const fetchTweets = async() => {
         const tweetsQuery = query(
             collection(db, "tweets"),
-            orderBy("createdAt", "desc")
+            orderBy("createAt", "desc")
         );
         const snapshot = await getDocs(tweetsQuery);
         const tweets = snapshot.docs.map(doc => {
@@ -38,13 +38,15 @@ export default function Timeline(){
             };
         });
         setTweet(tweets);
-    }
+    };
     useEffect(() => {
         fetchTweets();
     }, []);
     return (
         <Wrapper>
-            {JSON.stringify(tweets)}
+            {tweets.map(tweet => (
+            <Tweet key={tweet.id} {...tweet}/>
+            ))}
         </Wrapper>
     )
 }
