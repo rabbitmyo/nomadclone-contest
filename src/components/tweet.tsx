@@ -44,26 +44,21 @@ const DeleteBtn = styled.button`
 
 export default function Tweet({username, photo, tweet, userId, id}:ITweet){
     const user = auth.currentUser;
-    console.log(user?.uid === userId);
-    console.log('user',user);
     const onDelete = async () => {
         const ok = confirm("Are you sure you want yo delete this tweet?");
-        if (!ok || user?.uid === userId) return;
-        if(user !== null){
-            try{
-                //트윗 삭제
-                await deleteDoc(doc(db, "tweets", id));
-                console.log("delete!");
-                //트윗삭제시 이미지 삭제
-                if(photo){
-                    const photoRef = ref(storage, `tweets/${user.uid}/${id}`);
-                    await deleteObject(photoRef);
-                }
-            }catch(e){
-                console.log(e);
-            }finally{
-
+        if (!ok || user?.uid !== userId) return;
+        try{
+            //트윗 삭제
+            await deleteDoc(doc(db, "tweets", id));
+            //트윗삭제시 이미지 삭제
+            if(photo){
+                const photoRef = ref(storage, `tweets/${user.uid}/${id}`);
+                await deleteObject(photoRef);
             }
+        }catch(e){
+            console.log(e);
+        }finally{
+
         }
     }
     return (
