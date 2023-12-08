@@ -89,11 +89,11 @@ export default function PostTweetForm(){
             });
             if(file){
                 //파일 위치 reference 지정
-                const locationRef = ref(storage, `tweets/${user.uid}-${user.displayName}/${doc.id}`);
+                const locationRef = ref(storage, `tweets/${user.uid}/${doc.id}`);
                 const result = await uploadBytes(locationRef, file);
                 const url = await getDownloadURL(result.ref);
                 updateDoc(doc,{
-                    pohto: url
+                    photo: url
                 });
                 //사진 업로드 후 리셋
                 setTweet("");
