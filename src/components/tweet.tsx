@@ -82,7 +82,7 @@ const SubmitButton = styled.button`
     padding: 5px 10px;
     text-transform: uppercase;
     border-radius: 5px;
-    margin-right: 5px;
+    margin-left: 5px;
     cursor: pointer;
 `;
 
